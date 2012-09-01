@@ -4,7 +4,7 @@
 AC_PREREQ([2.69])
 AC_INIT([cliht], [0.1], [los-t@ya.ru])
 AC_CONFIG_AUX_DIR([config])
-AC_CONFIG_SRCDIR([main.c])
+AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
 
 AM_INIT_AUTOMAKE([-Wall])
@@ -24,5 +24,6 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([memset strchr])
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+		src/Makefile])
 AC_OUTPUT
