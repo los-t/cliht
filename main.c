@@ -1,27 +1,28 @@
 #include <stdio.h>
 
 #include "const.h"
-
-void print_usage() {
-	printf("Usage:\n");
-	printf("cliht [OPTIONS] URL\n");
-	printf("OPTIONS are:\n");
-
-	printf("\t--output, -o\n");
-	printf("\t\tPath to output directory. Default is ./\n");
-
-	printf("\t--help, -h\n");
-	printf("\t\tShow this message.\n");
-
-	printf("URL is well-formed HTTP URL. Other protocols are not supported.\n");
-}
+#include "cfg.h"
+#include "error.h"
 
 int main(int argc, char *argv[]) {
+	
+	Configuration *cfg = NULL;
 
-	if (argc == 1) {
+	ERROR_CODE err = cfg_init_from_cli(argc, argv, cfg);
+
+	if (err == ERR_CFG_NOARGS || err == ERR_CFG_HELPREQUEST) {
 		print_usage();
 		return 0;
 	}
+
+	/* Parse and verify the URL */
+	/* Check that we can access the OUTPUT path, create if necessary */
+	/* Try to connect to HOST on a given PORT */
+	/* Prepare GET request */
+	/* Send GET request */
+	/* Start Readng response from HOST dumping to immediately */
+	/* Close the handles and clean up */
+	cfg_free(cfg);
 	
 	return 0;
 }

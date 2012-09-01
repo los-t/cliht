@@ -1,0 +1,6 @@
+#include "error.h"
+
+const ERROR_CODE ERR_NONE = 0;
+
+const ERROR_CODE ERR_CFG_NOARGS = 1;
+const ERROR_CODE ERR_CFG_HELPREQUEST = 2;
