@@ -1,0 +1,20 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ERR_CFG_HELPREQUEST	error.c	/^const ERROR_CODE ERR_CFG_HELPREQUEST = 2;$/;"	v
+ERR_CFG_NOARGS	error.c	/^const ERROR_CODE ERR_CFG_NOARGS = 1;$/;"	v
+ERR_NONE	error.c	/^const ERROR_CODE ERR_NONE = 0;$/;"	v
+OPT_HELP	option.c	/^const Option OPT_HELP    = { .lname = "--help",   .sname = "-h", .vname = "" };$/;"	v
+OPT_OUTPATH	option.c	/^const Option OPT_OUTPATH = { .lname = "--output", .sname = "-o", .vname = "PATH" };$/;"	v
+arg_is	option.c	/^unsigned int arg_is(const char *arg, const Option opt) {$/;"	f
+arg_is_long	option.c	/^unsigned int arg_is_long(const char *arg, const Option opt) {$/;"	f
+arg_is_short	option.c	/^unsigned int arg_is_short(const char *arg, const Option opt) {$/;"	f
+cfg_free	cfg.c	/^ERROR_CODE cfg_free(Configuration *cfg) {$/;"	f
+cfg_init_from_cli	cfg.c	/^ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {$/;"	f
+main	main.c	/^int main(int argc, char *argv[]) {$/;"	f
+print_option	option.c	/^ERROR_CODE print_option(const Option opt, const char* desc) {$/;"	f
+print_usage	option.c	/^void print_usage() {$/;"	f
+set_value	cfg.c	/^ERROR_CODE set_value(char* opt, char* arg) {$/;"	f
