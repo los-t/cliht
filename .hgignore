@@ -1,2 +1,17 @@
 syntax: glob
+
+*.cache
+*.in
+*.log
+*.o
+*.status
+*.swp
+*~
+./config/*
+.deps
+Makefile
+aclocal.m4
 cliht
+config.h
+configure
+stamp-h1
