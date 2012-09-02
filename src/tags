@@ -12,6 +12,14 @@ ERR_NONE	error.c	/^const ERROR_CODE ERR_NONE = 0;$/;"	v
 ERR_URL	error.c	14;"	d	file:
 ERR_URL_CANNOTPARSE	error.c	/^const ERROR_CODE ERR_URL_CANNOTPARSE = ERR_URL + 1;$/;"	v
 ERR_URL_NOTENOUGHDATA	error.c	/^const ERROR_CODE ERR_URL_NOTENOUGHDATA = ERR_URL + 2;$/;"	v
+HTTP_HDR_AGENT	http.c	/^const char* HTTP_HDR_AGENT = "User-agent";$/;"	v
+HTTP_HDR_CONN	http.c	/^const char* HTTP_HDR_CONN = "Connection";$/;"	v
+HTTP_HDR_HOST	http.c	/^const char* HTTP_HDR_HOST = "Host";$/;"	v
+HTTP_HDR_SP	http.c	/^const char* HTTP_HDR_SP = ": ";$/;"	v
+HTTP_MTD_GET	http.c	/^const char* HTTP_MTD_GET = "GET";$/;"	v
+HTTP_SP	http.c	/^const char* HTTP_SP = " ";$/;"	v
+HTTP_USERAGENT	http.c	/^const char* HTTP_USERAGENT = "cliht\/0.1";$/;"	v
+HTTP_VERSION	http.c	/^const char* HTTP_VERSION = "HTTP\/1.0";$/;"	v
 OPT_HELP	option.c	/^const Option OPT_HELP    = { .lname = "--help",   .sname = "-h", .vname = "" };$/;"	v
 OPT_OUTPATH	option.c	/^const Option OPT_OUTPATH = { .lname = "--output", .sname = "-o", .vname = "PATH" };$/;"	v
 URL_DELIM_PORT	url.c	/^const char* URL_DELIM_PORT = ":";$/;"	v
@@ -25,6 +33,9 @@ arg_is_long	option.c	/^unsigned int arg_is_long(const char *arg, const Option op
 arg_is_short	option.c	/^unsigned int arg_is_short(const char *arg, const Option opt) {$/;"	f
 cfg_free	cfg.c	/^ERROR_CODE cfg_free(Configuration *cfg) {$/;"	f
 cfg_init_from_cli	cfg.c	/^ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {$/;"	f
+http_build_request	http.c	/^ERROR_CODE http_build_request(char** dst, const Url* url) {$/;"	f
+http_build_request_header	http.c	/^ERROR_CODE http_build_request_header(char** dst, const char* hdr, const char* val) {$/;"	f
+http_build_request_line	http.c	/^ERROR_CODE http_build_request_line(char** dst, const char* method, const char* path) {$/;"	f
 init_from_str	utl.c	/^ERROR_CODE init_from_str(char** dest, const char* src, const size_t len) {$/;"	f
 main	main.c	/^int main(int argc, char *argv[]) {$/;"	f
 print_option	option.c	/^ERROR_CODE print_option(const Option opt, const char* desc) {$/;"	f
