@@ -2,4 +2,4 @@ AM_CFLAGS = -std=c99
 
 bin_PROGRAMS = cliht
 
-cliht_SOURCES = cfg.c error.c option.c main.c 
+cliht_SOURCES = utl.c url.c cfg.c error.c option.c main.c 

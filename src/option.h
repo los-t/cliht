@@ -18,4 +18,6 @@ unsigned int arg_is_long(const char* /*argument*/, const Option /*option*/);
 
 ERROR_CODE print_option(const Option /*option*/, const char* /*description*/);
 
+void print_usage();
+
 #endif // CLIHT_OPTION_H
