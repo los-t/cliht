@@ -14,12 +14,6 @@ const char* URL_DELIM_PORT = ":";
 const char* URL_DELIM_ROOT = "/";
 
 ERROR_CODE url_init_from_str(Url* url, const char* str) {
-	char* proto_end  = NULL;
-	char* host_begin = NULL;
-	char* port_begin = NULL;
-	char* path_begin = NULL;
-	size_t dummy = 0;
-
 	ERROR_CODE err = ERR_NONE;
 
 	if (!str || !strlen(str))

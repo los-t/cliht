@@ -1,4 +1,4 @@
-AM_CFLAGS = -std=c99
+AM_CFLAGS = -std=c99 -Wall
 
 bin_PROGRAMS = cliht
 
