@@ -13,6 +13,9 @@ int main(int argc, char *argv[]) {
 	char* msg = NULL;
 	char* hdr = NULL;
 	char* body = NULL;
+	FILE* file = NULL;
+	char* filepath = NULL;
+	size_t fplen = 0;
 
 	int sock = 0;
 	
@@ -58,15 +61,24 @@ int main(int argc, char *argv[]) {
 		return err;
 	}
 
-	printf("Received HEAD: [%s]\n", hdr);
+	printf("Received data from %s\nHEAD: [%s]\n", url.host, hdr);
+
+	fplen = strlen(cfg.lpath) + strlen(url.host) + 2;
+	filepath = (char*)malloc(fplen * sizeof(char));
+	snprintf(filepath, fplen, "%s/%s", cfg.lpath, url.host);
+	printf("Saving to %s\n", filepath);
+
+	file = fopen(filepath, "w");
 
 	err = net_get_until(sock, &body, "\r\n\r\n");
 	if (err != ERR_NONE) {
 		return err;
 	}
-	printf("Received BODY: [%s]\n", body);
+	fputs(body, file);
 
 	/* Clean up */
+	close(file);
+	free(filepath);
 	net_free(sock);
 	if (body) free(body); 
 	if (hdr) free(hdr); 
