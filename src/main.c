@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	/* Clean up */
-	close(file);
+	fclose(file);
 	free(filepath);
 	net_free(sock);
 	if (body) free(body); 
