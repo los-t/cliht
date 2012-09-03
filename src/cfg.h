@@ -3,6 +3,8 @@
 
 #include "error.h"
 
+extern const char* DFLT_OUTPUTPATH;
+
 typedef struct CfgStruct {
 	char *url;
 	char *lpath;

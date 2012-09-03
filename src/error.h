@@ -3,25 +3,41 @@
 
 typedef unsigned int ERROR_CODE;
 
-extern const ERROR_CODE ERR_NONE;
+#define ERR_NONE 0
 
-extern const ERROR_CODE ERR_MEMFAIL;
+/* Generic errors */
+#define ERR_MEMFAIL           1
 
-extern const ERROR_CODE ERR_CFG_NOARGS;
-extern const ERROR_CODE ERR_CFG_HELPREQUEST;
+/* Configuration errors */
+#define ERR_CFG               0x000100
+#define ERR_CFG_NOARGS        ERR_CFG + 1
+#define ERR_CFG_HELPREQUEST   ERR_CFG + 2
 
-extern const ERROR_CODE ERR_URL_CANNOTPARSE;
-extern const ERROR_CODE ERR_URL_NOTENOUGHDATA;
+/* URL errors */
+#define ERR_URL               0x000200
+#define ERR_URL_CANNOTPARSE   ERR_URL + 1
+#define ERR_URL_NOTENOUGHDATA ERR_URL + 2
 
-extern const ERROR_CODE ERR_HTTP_BLDFAIL_HDR;
-extern const ERROR_CODE ERR_HTTP_BLDFAIL_LINE;
-extern const ERROR_CODE ERR_HTTP_BLDFAIL_RQST;
+/* HTTP errors */
+#define ERR_HTTP              0x000300
+#define ERR_HTTP_BLDFAIL_HDR  ERR_HTTP + 1
+#define ERR_HTTP_BLDFAIL_LINE ERR_HTTP + 2
+#define ERR_HTTP_BLDFAIL_RQST ERR_HTTP + 3
 
-extern const ERROR_CODE ERR_NET_ADDRFAIL;
-extern const ERROR_CODE ERR_NET_CONNFAIL;
-extern const ERROR_CODE ERR_NET_SOCKNOTVALID;
-extern const ERROR_CODE ERR_NET_SENDFAIL;
-extern const ERROR_CODE ERR_NET_RECVFAIL;
-extern const ERROR_CODE ERR_NET_CONNCLOSED;
+/* Net errors */
+#define ERR_NET               0x000400
+#define ERR_NET_ADDRFAIL      ERR_NET + 1
+#define ERR_NET_CONNFAIL      ERR_NET + 2
+#define ERR_NET_SOCKNOTVALID  ERR_NET + 3
+#define ERR_NET_SENDFAIL      ERR_NET + 4
+#define ERR_NET_RECVFAIL      ERR_NET + 5
+#define ERR_NET_CONNCLOSED    ERR_NET + 6
+
+/* File I/O errors */
+#define ERR_FILE              0x000500
+#define ERR_FILE_OPENFAIL     ERR_FILE + 1
+#define ERR_FILE_WRITEFAIL    ERR_FILE + 2
+
+void err_print(ERROR_CODE err);
 
 #endif // CLIHT_ERROR_H_

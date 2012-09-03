@@ -6,6 +6,8 @@
 
 #include "cfg.h"
 
+const char* DFLT_OUTPUTPATH = ".";
+
 ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 	char *equals_char = NULL;
 	size_t arglen = 0;
@@ -46,6 +48,9 @@ ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 			set_value(&cfg->url, argv[i]);
 		}
 	}
+
+	if (!cfg->lpath)
+		set_value(&cfg->lpath, DFLT_OUTPUTPATH);
 
 	return ERR_NONE;
 }
