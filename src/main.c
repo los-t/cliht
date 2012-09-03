@@ -11,6 +11,11 @@
 int main(int argc, char *argv[]) {
 
 	char* msg = NULL;
+	char* hdr = NULL;
+	char* body = NULL;
+
+	int sock = 0;
+	
 	
 	Configuration cfg;
 	Url url;
@@ -38,10 +43,34 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	printf("Msg:[\n%s]\n", msg);
-	/* http_save_data(url, cfg.lpath) */
+	err = net_connect(&sock, url.host, url.port);
+	if (err != ERR_NONE) {
+		return err;
+	}
+
+	err = net_send(sock, msg);
+	if (err != ERR_NONE) {
+		return err;
+	}
+
+	err = net_get_until(sock, &hdr, "\r\n\r\n");
+	if (err != ERR_NONE) {
+		return err;
+	}
+
+	printf("Received HEAD: [%s]\n", hdr);
+
+	err = net_get_until(sock, &body, "\r\n\r\n");
+	if (err != ERR_NONE) {
+		return err;
+	}
+	printf("Received BODY: [%s]\n", body);
 
 	/* Clean up */
+	net_free(sock);
+	if (body) free(body); 
+	if (hdr) free(hdr); 
+	if (msg) free(msg); 
 	url_free(&url);
 	cfg_free(&cfg);
 	

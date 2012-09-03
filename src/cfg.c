@@ -9,6 +9,7 @@
 ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 	char *equals_char = NULL;
 	size_t arglen = 0;
+	int i = 0;
 	
 	/* Clear the configuration first */
 	cfg_free(cfg);
@@ -16,7 +17,7 @@ ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 	if (argc == 1)
 		return ERR_CFG_NOARGS;
 
-	for(int i = 1; i < argc; i++) {
+	for(i = 1; i < argc; i++) {
 		if (arg_is(argv[i], OPT_HELP)) {
 			return ERR_CFG_HELPREQUEST;
 		}

@@ -4,10 +4,22 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+ADDRINFO	net.c	/^typedef struct addrinfo ADDRINFO;$/;"	t	typeref:struct:addrinfo	file:
 ERR_CFG	error.c	9;"	d	file:
 ERR_CFG_HELPREQUEST	error.c	/^const ERROR_CODE ERR_CFG_HELPREQUEST = ERR_CFG + 2;$/;"	v
 ERR_CFG_NOARGS	error.c	/^const ERROR_CODE ERR_CFG_NOARGS      = ERR_CFG + 1;$/;"	v
+ERR_HTTP	error.c	19;"	d	file:
+ERR_HTTP_BLDFAIL_HDR	error.c	/^const ERROR_CODE ERR_HTTP_BLDFAIL_HDR = ERR_HTTP + 1;$/;"	v
+ERR_HTTP_BLDFAIL_LINE	error.c	/^const ERROR_CODE ERR_HTTP_BLDFAIL_LINE = ERR_HTTP + 2;$/;"	v
+ERR_HTTP_BLDFAIL_RQST	error.c	/^const ERROR_CODE ERR_HTTP_BLDFAIL_RQST = ERR_HTTP + 3;$/;"	v
 ERR_MEMFAIL	error.c	/^const ERROR_CODE ERR_MEMFAIL = 1;;$/;"	v
+ERR_NET	error.c	25;"	d	file:
+ERR_NET_ADDRFAIL	error.c	/^const ERROR_CODE ERR_NET_ADDRFAIL = ERR_NET + 1;$/;"	v
+ERR_NET_CONNCLOSED	error.c	/^const ERROR_CODE ERR_NET_CONNCLOSED = ERR_NET + 6;$/;"	v
+ERR_NET_CONNFAIL	error.c	/^const ERROR_CODE ERR_NET_CONNFAIL = ERR_NET + 2;$/;"	v
+ERR_NET_RECVFAIL	error.c	/^const ERROR_CODE ERR_NET_RECVFAIL = ERR_NET + 5;$/;"	v
+ERR_NET_SENDFAIL	error.c	/^const ERROR_CODE ERR_NET_SENDFAIL = ERR_NET + 4;$/;"	v
+ERR_NET_SOCKNOTVALID	error.c	/^const ERROR_CODE ERR_NET_SOCKNOTVALID = ERR_NET + 3;$/;"	v
 ERR_NONE	error.c	/^const ERROR_CODE ERR_NONE = 0;$/;"	v
 ERR_URL	error.c	14;"	d	file:
 ERR_URL_CANNOTPARSE	error.c	/^const ERROR_CODE ERR_URL_CANNOTPARSE = ERR_URL + 1;$/;"	v
@@ -20,6 +32,7 @@ HTTP_MTD_GET	http.c	/^const char* HTTP_MTD_GET = "GET";$/;"	v
 HTTP_SP	http.c	/^const char* HTTP_SP = " ";$/;"	v
 HTTP_USERAGENT	http.c	/^const char* HTTP_USERAGENT = "cliht\/0.1";$/;"	v
 HTTP_VERSION	http.c	/^const char* HTTP_VERSION = "HTTP\/1.0";$/;"	v
+NET_CHUNKSIZE	net.c	/^const size_t NET_CHUNKSIZE = 1024;$/;"	v
 OPT_HELP	option.c	/^const Option OPT_HELP    = { .lname = "--help",   .sname = "-h", .vname = "" };$/;"	v
 OPT_OUTPATH	option.c	/^const Option OPT_OUTPATH = { .lname = "--output", .sname = "-o", .vname = "PATH" };$/;"	v
 URL_DELIM_PORT	url.c	/^const char* URL_DELIM_PORT = ":";$/;"	v
@@ -38,6 +51,12 @@ http_build_request_header	http.c	/^ERROR_CODE http_build_request_header(char** d
 http_build_request_line	http.c	/^ERROR_CODE http_build_request_line(char** dst, const char* method, const char* path) {$/;"	f
 init_from_str	utl.c	/^ERROR_CODE init_from_str(char** dest, const char* src, const size_t len) {$/;"	f
 main	main.c	/^int main(int argc, char *argv[]) {$/;"	f
+net_connect	net.c	/^ERROR_CODE net_connect(int* sock, const char* host, const long port) {$/;"	f
+net_free	net.c	/^ERROR_CODE net_free(int sock) {$/;"	f
+net_get_count	net.c	/^ERROR_CODE net_get_count(int sock, char** buf, const size_t count) {$/;"	f
+net_get_until	net.c	/^ERROR_CODE net_get_until(int sock, char** buf, const char* terminator) {$/;"	f
+net_recv_byte	net.c	/^ERROR_CODE net_recv_byte(int sock, char* byte) {$/;"	f
+net_send	net.c	/^ERROR_CODE net_send(int sock, const char* msg) {$/;"	f
 print_option	option.c	/^ERROR_CODE print_option(const Option opt, const char* desc) {$/;"	f
 print_usage	option.c	/^void print_usage() {$/;"	f
 set_value	cfg.c	/^ERROR_CODE set_value(char** opt, char* arg) {$/;"	f
