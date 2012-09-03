@@ -87,10 +87,6 @@ ERROR_CODE net_get_until(int sock, char** buf, const char* terminator) {
 	return ERR_NONE;
 }
 
-ERROR_CODE net_get_count(int sock, char** buf, const size_t count) {
-	
-	return ERR_NONE;
-}
 
 ERROR_CODE net_free(int sock) {
 	shutdown(sock, SHUT_RDWR);
