@@ -5,6 +5,7 @@
 #include "error.h"
 #include "http.h"
 #include "option.h"
+#include "net.h"
 #include "url.h"
 
 int main(int argc, char *argv[]) {
@@ -14,7 +15,6 @@ int main(int argc, char *argv[]) {
 	char* body = NULL;
 	FILE* file = NULL;
 	char* filepath = NULL;
-	size_t fplen = 0;
 
 	int sock = 0;
 	
@@ -57,17 +57,18 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	err = net_get_until(sock, &hdr, "\r\n\r\n");
+	/* err = net_get_until(sock, &hdr, "\r\n\r\n");
 	if (err != ERR_NONE) {
 		err_print(err);
 		exit(EXIT_FAILURE);
-	}
+	} */
 
 	printf("Received data from %s\nHEAD: [%s]\n", url.host, hdr);
 
-	fplen = strlen(cfg.lpath) + strlen(url.host) + 2;
-	filepath = (char*)malloc(fplen * sizeof(char));
-	snprintf(filepath, fplen, "%s/%s", cfg.lpath, url.host);
+	if (asprintf(&filepath, "%s/%s", cfg.lpath, url.host) < 0) {
+		err_print(ERR_MEMFAIL);
+		exit(EXIT_FAILURE);
+	}
 
 	printf("Saving to %s\n", filepath);
 
@@ -77,7 +78,7 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	err = net_get_until(sock, &body, "\r\n\r\n");
+	/*err = net_get_until(sock, &body, "\r\n\r\n");
 	if (err != ERR_NONE) {
 		err_print(err);
 		exit(EXIT_FAILURE);
@@ -86,7 +87,7 @@ int main(int argc, char *argv[]) {
 	if (fputs(body, file) == EOF) {
 		err_print(ERR_FILE_WRITEFAIL);
 		exit(EXIT_FAILURE);
-	}
+	} */
 
 	/* Clean up */
 	fclose(file);

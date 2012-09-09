@@ -1,11 +1,13 @@
+#include <assert.h>
 #include <netdb.h>
 #include <stdio.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
 
 #include "net.h"
 
-const size_t NET_CHUNKSIZE = 1024;
+const size_t NET_CHUNKSIZE = 512;
 
 typedef struct addrinfo ADDRINFO;
 
@@ -14,7 +16,7 @@ ERROR_CODE net_connect(int* sock, const char* host, const long port) {
 	char service[64];
 	int res = 0;
 	
-	snprintf(service, 64*sizeof(char), "%d", port);
+	snprintf(service, 64*sizeof(char), "%ld", port);
 	res = getaddrinfo(host, service, NULL, &addr);
 	if (res != 0) {
 		return ERR_NET_ADDRFAIL;
@@ -42,13 +44,12 @@ ERROR_CODE net_connect(int* sock, const char* host, const long port) {
 
 ERROR_CODE net_send(int sock, const char* msg) {
 	size_t nsent = 0;
-	size_t size = strlen(msg) * sizeof(msg);
+	size_t size = strlen(msg);
 
-	if (!sock) {
-		return ERR_NET_SOCKNOTVALID;
-	}
+	assert(sock != 0);
 
 	nsent = send(sock, msg, size, 0);
+
 	if(nsent < 0) {
 		return ERR_NET_SENDFAIL;
 	}
@@ -56,54 +57,42 @@ ERROR_CODE net_send(int sock, const char* msg) {
 	return ERR_NONE;
 }
 
-ERROR_CODE net_get_until(int sock, char** buf, const char* terminator) {
-	char tmp;
-	size_t count = 0;
-	size_t nbyte = 0;
-	size_t bufsize = NET_CHUNKSIZE;
+ERROR_CODE net_recv_chunk(int sock, char* data, size_t* len) {
+	assert(sock != 0);
 
-	*buf = (char*)malloc(NET_CHUNKSIZE);
+	*len = recv(sock, data, NET_CHUNKSIZE, 0);
 
-	while(net_recv_byte(sock, &tmp) == ERR_NONE) {
-		if (!terminator[count])
-			break;
-
-		if (tmp == terminator[count])
-			count++;
-		else
-			count = 0;
-
-		nbyte++;
-		if (nbyte == bufsize) {
-			/* enlarge the buffer */
-			bufsize += NET_CHUNKSIZE;
-			*buf = (char*)realloc(*buf, bufsize);
-		}
-
-		(*buf)[nbyte] = tmp;
-	}
-	(*buf)[nbyte] = '\0';
-
-	return ERR_NONE;
-}
-
-
-ERROR_CODE net_free(int sock) {
-	shutdown(sock, SHUT_RDWR);
-	
-	return ERR_NONE;
-}
-
-ERROR_CODE net_recv_byte(int sock, char* byte) {
-	size_t n = 0;
-
-	n = recv(sock, byte, sizeof(*byte), 0);
-
-	if (n == 0)
+	if(*len == 0)
 		return ERR_NET_CONNCLOSED;
-
-	if (n < 0)
+	
+	if(*len < 0)
 		return ERR_NET_RECVFAIL;
 
 	return ERR_NONE;
 }
+
+ERROR_CODE net_get(int sock, NET_HANDLER handle, NET_HANDLER_OBJ obj) {
+	char buf[NET_CHUNKSIZE];
+	size_t size = 0;
+	ERROR_CODE res;
+
+	assert(sock);
+
+	while ((res = net_recv_chunk(sock, buf, &size)) == ERR_NONE) {
+		handle(obj, buf, size);
+	}
+	
+	/* TODO: Consider this postcondition */
+	assert(res == ERR_NET_CONNCLOSED);
+	
+	return ERR_NONE;
+}
+
+ERROR_CODE net_free(int sock) {
+
+	if(sock)
+		shutdown(sock, SHUT_RDWR);
+	
+	return ERR_NONE;
+}
+

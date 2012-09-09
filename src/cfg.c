@@ -1,5 +1,10 @@
-#include <stdlib.h>
+#define POSIX_C_SOURCE 200809L
+#define _GNU_SOURCE
+
+#include <assert.h>
 #include <memory.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "option.h"
@@ -16,8 +21,7 @@ ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 	/* Clear the configuration first */
 	cfg_free(cfg);
 
-	if (argc == 1)
-		return ERR_CFG_NOARGS;
+	assert(argc > 1);
 
 	for(i = 1; i < argc; i++) {
 		if (arg_is(argv[i], OPT_HELP)) {
@@ -33,7 +37,7 @@ ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 			} else if (arg_is_short(argv[i], OPT_OUTPATH) &&
 			           arglen > strlen(OPT_OUTPATH.sname)) {
 				/* option is '-ovalue' */
-				set_value(&cfg->lpath, argv[i] + strlen(OPT_OUTPATH.sname)*sizeof(*OPT_OUTPATH.sname));
+				set_value(&cfg->lpath, argv[i] + strlen(OPT_OUTPATH.sname));
 			} else {
 				/* option is '-o value' or '--opt value' */
 				i++;
@@ -55,17 +59,11 @@ ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {
 	return ERR_NONE;
 }
 
-ERROR_CODE set_value(char** opt, char* arg) {
-	size_t dummylen;
-	size_t dummysize;
+ERROR_CODE set_value(char** opt, const char* arg) {
+	*opt = strdup(arg);
 
-	dummylen = strlen(arg);
-	dummysize = dummylen * sizeof(*arg);
-
-	*opt = (char*)malloc(dummysize);
-	memset(*opt, 0, dummysize);
-
-	strncpy(*opt, arg, dummylen);
+	/* TODO: should we check the postcondition here? */
+	assert(*opt != NULL);
 	
 	return ERR_NONE;
 }

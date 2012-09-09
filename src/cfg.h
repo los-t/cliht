@@ -13,6 +13,6 @@ typedef struct CfgStruct {
 ERROR_CODE cfg_init_from_cli(int /*argc*/, char ** /*argv*/, Configuration * /*cfg*/);
 ERROR_CODE cfg_free(Configuration * /*cfg*/);
 
-ERROR_CODE set_value(char ** /*option*/, char * /*arg*/);
+ERROR_CODE set_value(char ** /*option*/, const char * /*arg*/);
 
 #endif // CLIHT_CFG_H_

@@ -7,10 +7,12 @@
 
 extern const size_t NET_CHUNKSIZE;
 
-ERROR_CODE net_connect(int* sock, const char* host, const long port);
-ERROR_CODE net_send(int sock, const char* msg);
-ERROR_CODE net_get_until(int sock, char** buf, const char* terminator);
-ERROR_CODE net_free(int sock);
-ERROR_CODE net_recv_byte(int sock, char* byte);
+typedef void* NET_HANDLER_OBJ;
+typedef ERROR_CODE (*NET_HANDLER)(NET_HANDLER_OBJ, const char*, const size_t);
+
+ERROR_CODE net_connect(int* /*sock*/, const char* /*host*/, const long /*port*/);
+ERROR_CODE net_send(int /*sock*/, const char* /*msg*/);
+ERROR_CODE net_get(int /*sock*/, NET_HANDLER /*handle*/, NET_HANDLER_OBJ /*hobj*/);
+ERROR_CODE net_free(int /*sock*/);
 
 #endif // CLIHT_NET_H_

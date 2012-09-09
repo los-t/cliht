@@ -130,7 +130,7 @@ ERROR_CODE url_extract_host(char** dst, const char* src) {
 		host_end = strstr(host_begin, URL_DELIM_ROOT);
 
 	if (!host_end) {
-		host_end = src + strlen(src) * sizeof(src);
+		host_end = src + strlen(src);
 		if(host_end == host_begin)
 			return ERR_URL_NOTENOUGHDATA;
 	}
