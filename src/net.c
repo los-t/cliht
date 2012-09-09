@@ -22,7 +22,7 @@ ERROR_CODE net_connect(int* sock, const char* host, const long port) {
 		return ERR_NET_ADDRFAIL;
 	}
 
-	for(p = addr; p != NULL; p->ai_next) {
+	for(p = addr; p != NULL; p = p->ai_next) {
 		if ((*sock = socket(p->ai_family, p->ai_socktype, p->ai_protocol)) == -1)
 			continue;
 
