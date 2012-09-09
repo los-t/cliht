@@ -31,13 +31,13 @@ ERROR_CODE net_connect(int* sock, const char* host, const long port) {
 
 		break;
 	}
-	
+
+	freeaddrinfo(addr);
+
 	if (!p) {
 		*sock = 0;
 		return ERR_NET_CONNFAIL;
 	}
-
-	freeaddrinfo(addr);
 
 	return ERR_NONE;
 }
@@ -74,16 +74,19 @@ ERROR_CODE net_recv_chunk(int sock, char* data, size_t* len) {
 ERROR_CODE net_get(int sock, NET_HANDLER handle, NET_HANDLER_OBJ obj) {
 	char buf[NET_CHUNKSIZE];
 	size_t size = 0;
-	ERROR_CODE res;
+	ERROR_CODE err;
 
 	assert(sock);
 
-	while ((res = net_recv_chunk(sock, buf, &size)) == ERR_NONE) {
-		handle(obj, buf, size);
+	while ((err = net_recv_chunk(sock, buf, &size)) == ERR_NONE) {
+		if ((err = handle(obj, buf, size)) != ERR_NONE) {
+			shutdown(sock, SHUT_RDWR);
+			return err;
+		}
 	}
 	
 	/* TODO: Consider this postcondition */
-	assert(res == ERR_NET_CONNCLOSED);
+	assert(err == ERR_NET_CONNCLOSED);
 	
 	return ERR_NONE;
 }

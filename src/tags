@@ -14,34 +14,46 @@ HTTP_MTD_GET	http.c	/^const char* HTTP_MTD_GET = "GET";$/;"	v
 HTTP_SP	http.c	/^const char* HTTP_SP = " ";$/;"	v
 HTTP_USERAGENT	http.c	/^const char* HTTP_USERAGENT = "cliht\/0.1";$/;"	v
 HTTP_VERSION	http.c	/^const char* HTTP_VERSION = "HTTP\/1.0";$/;"	v
-NET_CHUNKSIZE	net.c	/^const size_t NET_CHUNKSIZE = 1024;$/;"	v
+NET_CHUNKSIZE	net.c	/^const size_t NET_CHUNKSIZE = 512;$/;"	v
 OPT_HELP	option.c	/^const Option OPT_HELP    = { .lname = "--help",   .sname = "-h", .vname = "" };$/;"	v
 OPT_OUTPATH	option.c	/^const Option OPT_OUTPATH = { .lname = "--output", .sname = "-o", .vname = "PATH" };$/;"	v
+POSIX_C_SOURCE	cfg.c	1;"	d	file:
 URL_DELIM_PORT	url.c	/^const char* URL_DELIM_PORT = ":";$/;"	v
 URL_DELIM_PROTO	url.c	/^const char* URL_DELIM_PROTO = ":\/\/";$/;"	v
 URL_DELIM_ROOT	url.c	/^const char* URL_DELIM_ROOT = "\/";$/;"	v
 URL_DFLT_PATH	url.c	/^const char* URL_DFLT_PATH = "\/";$/;"	v
 URL_DFLT_PORT	url.c	/^const long URL_DFLT_PORT = 80;$/;"	v
 URL_DFLT_PROTO	url.c	/^const char* URL_DFLT_PROTO = "http";$/;"	v
+_GNU_SOURCE	cfg.c	2;"	d	file:
+_GNU_SOURCE	fs.c	1;"	d	file:
+_GNU_SOURCE	http.c	1;"	d	file:
+_GNU_SOURCE	main.c	1;"	d	file:
 arg_is	option.c	/^unsigned int arg_is(const char *arg, const Option opt) {$/;"	f
 arg_is_long	option.c	/^unsigned int arg_is_long(const char *arg, const Option opt) {$/;"	f
 arg_is_short	option.c	/^unsigned int arg_is_short(const char *arg, const Option opt) {$/;"	f
 cfg_free	cfg.c	/^ERROR_CODE cfg_free(Configuration *cfg) {$/;"	f
 cfg_init_from_cli	cfg.c	/^ERROR_CODE cfg_init_from_cli(int argc, char **argv, Configuration *cfg) {$/;"	f
 err_print	error.c	/^void err_print(ERROR_CODE err) {$/;"	f
+fs_close	fs.c	/^ERROR_CODE fs_close(File* file) {$/;"	f
+fs_create	fs.c	/^ERROR_CODE fs_create(File** file, const char* path) {$/;"	f
+fs_free	fs.c	/^ERROR_CODE fs_free(File** file) {$/;"	f
+fs_open	fs.c	/^ERROR_CODE fs_open(File* file) {$/;"	f
+fs_write	fs.c	/^ERROR_CODE fs_write(File* file, const char* data, const size_t size) {$/;"	f
 http_build_request	http.c	/^ERROR_CODE http_build_request(char** dst, const Url* url) {$/;"	f
 http_build_request_header	http.c	/^ERROR_CODE http_build_request_header(char** dst, const char* hdr, const char* val) {$/;"	f
 http_build_request_line	http.c	/^ERROR_CODE http_build_request_line(char** dst, const char* method, const char* path) {$/;"	f
+http_get	http.c	/^ERROR_CODE http_get(const Url* url, const char* path) {$/;"	f
+http_save_helper	http.c	/^ERROR_CODE http_save_helper(NET_HANDLER_OBJ file, const char* data, const size_t size) {$/;"	f
 init_from_str	utl.c	/^ERROR_CODE init_from_str(char** dest, const char* src, const size_t len) {$/;"	f
 main	main.c	/^int main(int argc, char *argv[]) {$/;"	f
 net_connect	net.c	/^ERROR_CODE net_connect(int* sock, const char* host, const long port) {$/;"	f
 net_free	net.c	/^ERROR_CODE net_free(int sock) {$/;"	f
-net_get_until	net.c	/^ERROR_CODE net_get_until(int sock, char** buf, const char* terminator) {$/;"	f
-net_recv_byte	net.c	/^ERROR_CODE net_recv_byte(int sock, char* byte) {$/;"	f
+net_get	net.c	/^ERROR_CODE net_get(int sock, NET_HANDLER handle, NET_HANDLER_OBJ obj) {$/;"	f
+net_recv_chunk	net.c	/^ERROR_CODE net_recv_chunk(int sock, char* data, size_t* len) {$/;"	f
 net_send	net.c	/^ERROR_CODE net_send(int sock, const char* msg) {$/;"	f
 print_option	option.c	/^ERROR_CODE print_option(const Option opt, const char* desc) {$/;"	f
 print_usage	option.c	/^void print_usage() {$/;"	f
-set_value	cfg.c	/^ERROR_CODE set_value(char** opt, char* arg) {$/;"	f
+set_value	cfg.c	/^ERROR_CODE set_value(char** opt, const char* arg) {$/;"	f
 url_alloc	url.c	/^ERROR_CODE url_alloc(Url* url) {$/;"	f
 url_extract_host	url.c	/^ERROR_CODE url_extract_host(char** dst, const char* src) {$/;"	f
 url_extract_path	url.c	/^ERROR_CODE url_extract_path(char** dst, const char* src) {$/;"	f

@@ -19,4 +19,6 @@ ERROR_CODE http_build_request_line(char** dst, const char* method, const char* p
 ERROR_CODE http_build_request_header(char** dst, const char* hdr, const char* val);
 ERROR_CODE http_build_request(char** dst, const Url* url);
 
+ERROR_CODE http_get(const Url* /*url*/, const char* /*path*/);
+
 #endif // CLIHT_HTTP_H_

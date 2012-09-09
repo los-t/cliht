@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "fs.h"
+#include "net.h"
+
 #include "http.h"
 
 const char* HTTP_SP = " ";
@@ -79,3 +82,41 @@ ERROR_CODE http_build_request(char** dst, const Url* url) {
 	return ERR_NONE;
 }
 
+ERROR_CODE http_save_helper(NET_HANDLER_OBJ file, const char* data, const size_t size) {
+	File *strm = (File*)file;
+
+	return fs_write(strm, data, size);
+}
+
+ERROR_CODE http_get(const Url* url, const char* path) {
+	char *request = NULL;
+	int sock = 0;
+	File *file = NULL;
+	ERROR_CODE err = ERR_NONE;	
+
+	err = net_connect(&sock, url->host, url->port);
+	if (err != ERR_NONE)
+		return err;
+
+	err = http_build_request(&request, url);
+	if (err != ERR_NONE)
+		return err;
+		
+	err = net_send(sock, request);
+	if (err != ERR_NONE)
+		return err;
+
+	err = fs_create(&file, path);
+	if (err != ERR_NONE)
+		return err;
+
+	err = net_get(sock, &http_save_helper, file);
+	if (err != ERR_NONE)
+		return err;
+
+	fs_free(&file);
+	net_free(sock);
+	free(request);
+
+	return ERR_NONE;
+}
