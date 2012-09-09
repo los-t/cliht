@@ -6,7 +6,6 @@
 #include "error.h"
 #include "http.h"
 #include "option.h"
-#include "net.h"
 #include "url.h"
 
 int main(int argc, char *argv[]) {
