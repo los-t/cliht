@@ -47,7 +47,6 @@ http_get	http.c	/^ERROR_CODE http_get(const Url* url, const char* path) {$/;"	f
 http_header_helper	http.c	/^const char* http_header_helper(const char* data, size_t* datasize) {$/;"	f
 http_header_process	http.c	/^ERROR_CODE http_header_process(char* hdr) {$/;"	f
 http_save_helper	http.c	/^ERROR_CODE http_save_helper(NET_HANDLER_OBJ file, const char* data, const size_t size) {$/;"	f
-init_from_str	utl.c	/^ERROR_CODE init_from_str(char** dest, const char* src, const size_t len) {$/;"	f
 main	main.c	/^int main(int argc, char *argv[]) {$/;"	f
 net_connect	net.c	/^ERROR_CODE net_connect(int* sock, const char* host, const long port) {$/;"	f
 net_free	net.c	/^ERROR_CODE net_free(int sock) {$/;"	f
@@ -57,11 +56,5 @@ net_send	net.c	/^ERROR_CODE net_send(int sock, const char* msg) {$/;"	f
 print_option	option.c	/^ERROR_CODE print_option(const Option opt, const char* desc) {$/;"	f
 print_usage	option.c	/^void print_usage() {$/;"	f
 set_value	cfg.c	/^ERROR_CODE set_value(char** opt, const char* arg) {$/;"	f
-url_alloc	url.c	/^ERROR_CODE url_alloc(Url* url) {$/;"	f
-url_extract_host	url.c	/^ERROR_CODE url_extract_host(char** dst, const char* src) {$/;"	f
-url_extract_path	url.c	/^ERROR_CODE url_extract_path(char** dst, const char* src) {$/;"	f
-url_extract_port	url.c	/^ERROR_CODE url_extract_port(long* dst, const char* src) {$/;"	f
-url_extract_proto	url.c	/^ERROR_CODE url_extract_proto(char** dst, const char* src) {$/;"	f
-url_free	url.c	/^ERROR_CODE url_free(Url* url) {$/;"	f
-url_init_from_str	url.c	/^ERROR_CODE url_init_from_str(Url* url, const char* str) {$/;"	f
-url_to_str	url.c	/^ERROR_CODE url_to_str(Url* url, char* str, size_t len) {$/;"	f
+url_create	url.c	/^ERROR_CODE url_create(Url** url, const char* strurl) {$/;"	f
+url_free	url.c	/^ERROR_CODE url_free(Url** url) {$/;"	f
