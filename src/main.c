@@ -12,12 +12,11 @@ int main(int argc, char *argv[]) {
 	char* filepath = NULL;
 	
 	Configuration cfg;
-	Url url;
+	Url *url;
 
 	ERROR_CODE err = ERR_NONE;
 
 	memset(&cfg, 0, sizeof(Configuration));
-	memset(&url, 0, sizeof(Url));
 
   err = cfg_init_from_cli(argc, argv, &cfg);
 	if (err == ERR_CFG_NOARGS || err == ERR_CFG_HELPREQUEST) {
@@ -25,20 +24,20 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 
-	err = url_init_from_str(&url, cfg.url);
+	err = url_create(&url, cfg.url);
 	if (err != ERR_NONE) {
 		err_print(err);
 		exit(EXIT_FAILURE);
 	}
 
-	if (asprintf(&filepath, "%s/%s", cfg.lpath, url.host) < 0) {
+	if (asprintf(&filepath, "%s/%s", cfg.lpath, url->host) < 0) {
 		err_print(ERR_MEMFAIL);
 		exit(EXIT_FAILURE);
 	}
 
 	printf("Saving to %s\n", filepath);
 
-	err = http_get(&url, filepath);
+	err = http_get(url, filepath);
 	if (err != ERR_NONE) {
 		err_print(err);
 		exit(EXIT_FAILURE);
