@@ -16,6 +16,7 @@ HTTP_SP	http.c	/^const char* HTTP_SP = " ";$/;"	v
 HTTP_USERAGENT	http.c	/^const char* HTTP_USERAGENT = "cliht\/0.1";$/;"	v
 HTTP_VERSION	http.c	/^const char* HTTP_VERSION = "HTTP\/1.0";$/;"	v
 NET_CHUNKSIZE	net.c	/^const size_t NET_CHUNKSIZE = 512;$/;"	v
+NET_SERVICELEN	net.c	/^const size_t NET_SERVICELEN = 64;$/;"	v
 OPT_HELP	option.c	/^const Option OPT_HELP    = { .lname = "--help",   .sname = "-h", .vname = "" };$/;"	v
 OPT_OUTPATH	option.c	/^const Option OPT_OUTPATH = { .lname = "--output", .sname = "-o", .vname = "PATH" };$/;"	v
 POSIX_C_SOURCE	cfg.c	1;"	d	file:

@@ -8,15 +8,16 @@
 #include "net.h"
 
 const size_t NET_CHUNKSIZE = 512;
+const size_t NET_SERVICELEN = 64;
 
 typedef struct addrinfo ADDRINFO;
 
 ERROR_CODE net_connect(int* sock, const char* host, const long port) {
 	ADDRINFO *addr, *p;
-	char service[64];
+	char service[NET_SERVICELEN];
 	int res = 0;
 	
-	snprintf(service, 64*sizeof(char), "%ld", port);
+	snprintf(service, NET_SERVICELEN, "%ld", port);
 	res = getaddrinfo(host, service, NULL, &addr);
 	if (res != 0) {
 		return ERR_NET_ADDRFAIL;

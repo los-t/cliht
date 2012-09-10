@@ -1,8 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "utl.h"
-
 #include "url.h"
 
 const long URL_DFLT_PORT = 80;
