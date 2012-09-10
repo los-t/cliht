@@ -11,6 +11,7 @@ HTTP_HDR_CONN	http.c	/^const char* HTTP_HDR_CONN = "Connection";$/;"	v
 HTTP_HDR_HOST	http.c	/^const char* HTTP_HDR_HOST = "Host";$/;"	v
 HTTP_HDR_SP	http.c	/^const char* HTTP_HDR_SP = ": ";$/;"	v
 HTTP_MTD_GET	http.c	/^const char* HTTP_MTD_GET = "GET";$/;"	v
+HTTP_RESPHDR_SP	http.c	/^const char* HTTP_RESPHDR_SP = "\\r\\n\\r\\n";$/;"	v
 HTTP_SP	http.c	/^const char* HTTP_SP = " ";$/;"	v
 HTTP_USERAGENT	http.c	/^const char* HTTP_USERAGENT = "cliht\/0.1";$/;"	v
 HTTP_VERSION	http.c	/^const char* HTTP_VERSION = "HTTP\/1.0";$/;"	v
@@ -43,6 +44,8 @@ http_build_request	http.c	/^ERROR_CODE http_build_request(char** dst, const Url*
 http_build_request_header	http.c	/^ERROR_CODE http_build_request_header(char** dst, const char* hdr, const char* val) {$/;"	f
 http_build_request_line	http.c	/^ERROR_CODE http_build_request_line(char** dst, const char* method, const char* path) {$/;"	f
 http_get	http.c	/^ERROR_CODE http_get(const Url* url, const char* path) {$/;"	f
+http_header_helper	http.c	/^const char* http_header_helper(const char* data, size_t* datasize) {$/;"	f
+http_header_process	http.c	/^ERROR_CODE http_header_process(char* hdr) {$/;"	f
 http_save_helper	http.c	/^ERROR_CODE http_save_helper(NET_HANDLER_OBJ file, const char* data, const size_t size) {$/;"	f
 init_from_str	utl.c	/^ERROR_CODE init_from_str(char** dest, const char* src, const size_t len) {$/;"	f
 main	main.c	/^int main(int argc, char *argv[]) {$/;"	f
