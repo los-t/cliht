@@ -14,7 +14,6 @@ const char* URL_DELIM_PORT = ":";
 const char* URL_DELIM_ROOT = "/";
 
 ERROR_CODE url_create(Url** url, const char* strurl) {
-	const char* pos = strurl;
 	const char* npos = strurl;
 
 	const char* host_pos = NULL;
@@ -28,15 +27,15 @@ ERROR_CODE url_create(Url** url, const char* strurl) {
 
 	*url = (Url*)malloc(sizeof(Url));
 
-	npos = strstr(pos, URL_DELIM_PROTO);
+	npos = strstr(strurl, URL_DELIM_PROTO);
 	if (npos) {
 		/* we have a protocol */
-		(*url)->proto = strndup(pos, npos - pos);
+		(*url)->proto = strndup(strurl, npos - strurl);
 	} else {
 		/* set protocol to default */
 		(*url)->proto = strdup(URL_DFLT_PROTO);
 	}
-	host_pos = npos ? npos + strlen(URL_DELIM_PROTO) : pos;
+	host_pos = npos ? npos + strlen(URL_DELIM_PROTO) : strurl;
 
 	npos = strstr(host_pos, URL_DELIM_PORT);
 	if (npos) {
@@ -72,10 +71,6 @@ ERROR_CODE url_create(Url** url, const char* strurl) {
 		(*url)->host = strndup(host_pos, host_end - host_pos);
 	}
 
-	printf("DBG: HOST  [%s]\n", (*url)->host);
-	printf("DBG: PORT  [%ld]\n", (*url)->port);
-	printf("DBG: PROTO [%s]\n", (*url)->proto);
-	printf("DBG: PATH  [%s]\n", (*url)->path);
 	return ERR_NONE;
 }
 
